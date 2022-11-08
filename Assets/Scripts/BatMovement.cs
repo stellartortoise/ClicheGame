@@ -12,6 +12,8 @@ public class BatMovement : MonoBehaviour
     public Transform aimTarget;
     public float lookSpeed;
 
+    private Rigidbody rb;
+
     private Transform playerModel;
 
     private float mZCoord;
@@ -22,6 +24,9 @@ public class BatMovement : MonoBehaviour
     {
         playerModel = transform.GetChild(0);
         startz = Camera.main.transform.position.z - 7f;
+
+        rb = GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -31,15 +36,25 @@ public class BatMovement : MonoBehaviour
         float v = Input.GetAxis("Mouse Y");
 
         LocalMove(h, v, xySpeed);
-        RotationLook(h, v, lookSpeed);
+        //RotationLook(h, v, lookSpeed);
         HorizontalLean(playerModel, h, 80, 0.1f);
+
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(new Vector3(0, 6.5f, 0), ForceMode.Impulse);
+        }
         
     }
 
     private void LocalMove(float x, float y, float speed)
     {
         //transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
-        transform.localPosition = Vector3.Lerp(transform.localPosition, GetMouseWorldPos(), 0.01f);
+        //float xx = -(transform.localPosition.x - Input.mousePosition.x) * 0.1f;
+        float xx = Mathf.Lerp(transform.localPosition.x, Input.mousePosition.x, 0.0001f); //Mouse Position TAKES INTO ACCOUNT BOTH MONITORS
+        float yy = rb.velocity.y;
+
+        //transform.localPosition = Vector3.Lerp(new Vector3(transform.localPosition.x, rb.velocity.y, transform.localPosition.z), GetMouseWorldPos(), 0.01f);
+        transform.localPosition = new Vector3(xx, transform.position.y, transform.localPosition.z);
         ClampPosition();
     }
 
