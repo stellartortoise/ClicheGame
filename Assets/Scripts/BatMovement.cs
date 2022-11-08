@@ -14,10 +14,14 @@ public class BatMovement : MonoBehaviour
 
     private Transform playerModel;
 
+    private float mZCoord;
+    private float startz;
+
     // Start is called before the first frame update
     void Start()
     {
         playerModel = transform.GetChild(0);
+        startz = Camera.main.transform.position.z - 7f;
     }
 
     // Update is called once per frame
@@ -29,12 +33,14 @@ public class BatMovement : MonoBehaviour
         LocalMove(h, v, xySpeed);
         RotationLook(h, v, lookSpeed);
         HorizontalLean(playerModel, h, 80, 0.1f);
-        ClampPosition();
+        
     }
 
     private void LocalMove(float x, float y, float speed)
     {
-        transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
+        //transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
+        transform.localPosition = Vector3.Lerp(transform.localPosition, GetMouseWorldPos(), 0.01f);
+        ClampPosition();
     }
 
     void ClampPosition()
@@ -49,7 +55,7 @@ public class BatMovement : MonoBehaviour
     {
         //aimTarget.parent.position = Vector3.zero;
         aimTarget.localPosition = new Vector3(h, v, 1);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(aimTarget.position), Mathf.Deg2Rad * speed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(GetMouseWorldPosTarget()), Mathf.Deg2Rad * speed);
     }
 
     void HorizontalLean(Transform target, float axis, float leanLimit, float lerpTime)
@@ -63,6 +69,24 @@ public class BatMovement : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(aimTarget.position, 0.5f);
         Gizmos.DrawSphere(aimTarget.position, 0.15f);
+    }
+
+    private Vector3 GetMouseWorldPos()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+
+        mousePoint.z = Camera.main.transform.position.z - 7f; //startz;
+
+        return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+
+    private Vector3 GetMouseWorldPosTarget()
+    {
+        Vector3 mousePoint = Input.mousePosition;
+
+        mousePoint.z = Camera.main.transform.position.z + 7f;
+
+        return Camera.main.ScreenToWorldPoint(mousePoint);
     }
 
 }
