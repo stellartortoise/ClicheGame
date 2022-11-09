@@ -17,14 +17,15 @@ public class CustomImageEffect : MonoBehaviour
 
 	// Demo Code
 	bool _scanning;
-	//Scannable[] _scannables;
+    //Scannable[] _scannables;
 
-	//void Start()
-	//{
-	//	_scannables = FindObjectsOfType<Scannable>();
-	//}
+    void Start()
+    {
+		//_scannables = FindObjectsOfType<Scannable>();
+		_scanning = true;
+    }
 
-	void Update()
+    void Update()
 	{
 		if (_scanning)
 		{
@@ -36,18 +37,32 @@ public class CustomImageEffect : MonoBehaviour
 			//}
 		}
 
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			_scanning = true;
-			ScanDistance = 0;
-		}
+		//if (Input.GetKeyDown(KeyCode.C))
+		//{
+		//	_scanning = true;
+		//	ScanDistance = 0;
+		//}
 
-		if (Input.GetMouseButtonDown(0))
+		//if (Input.GetMouseButtonDown(0))
+		//{
+		//	Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+		//	RaycastHit hit;
+
+		//	if (Physics.Raycast(ray, out hit))
+		//	{
+		//		_scanning = true;
+		//		ScanDistance = 0;
+		//		ScannerOrigin.position = hit.point;
+		//	}
+		//}
+
+		if (ScanDistance > 200f)
 		{
-			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+			//Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+			//Ray ray = transform.up;
 			RaycastHit hit;
 
-			if (Physics.Raycast(ray, out hit))
+			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
 			{
 				_scanning = true;
 				ScanDistance = 0;
