@@ -1932,7 +1932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScannerOrigin: {fileID: 894892768}
   EffectMaterial: {fileID: 2100000, guid: 1768d034b743f7c47b1a45f1730b6235, type: 2}
-  ScanDistance: 3301.5554
+  ScanDistance: 6204.7974
   soundSpeed: 100
 --- !u!1001 &1477030933
 PrefabInstance:
@@ -2215,7 +2215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1806298119
 Transform:
   m_ObjectHideFlags: 0

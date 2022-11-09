@@ -35,7 +35,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _LeadSharp: 40
-    - _ScanDistance: 3301.5554
+    - _ScanDistance: 8638.23
     - _ScanWidth: 100
     m_Colors:
     - _Color: {r: 0.9528302, g: 0.05842829, b: 0.05842829, a: 1}

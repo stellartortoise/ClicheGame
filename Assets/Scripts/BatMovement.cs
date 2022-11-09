@@ -37,7 +37,7 @@ public class BatMovement : MonoBehaviour
 
         LocalMove(h, v, xySpeed);
         //RotationLook(h, v, lookSpeed);
-        //HorizontalLean(playerModel, h, 80, 0.1f);
+        HorizontalLean(playerModel, h, 45, 0.1f);
 
         //if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         //{
@@ -68,15 +68,21 @@ public class BatMovement : MonoBehaviour
 
     void RotationLook(float h, float v, float speed)
     {
+        ////aimTarget.parent.position = Vector3.zero;
+        //aimTarget.localPosition = new Vector3(h, v, 5f);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(GetMouseWorldPosTarget()), Mathf.Deg2Rad * speed);
+
         //aimTarget.parent.position = Vector3.zero;
-        aimTarget.localPosition = new Vector3(h, v, 5f);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(GetMouseWorldPosTarget()), Mathf.Deg2Rad * speed);
+        //aimTarget.position = Vector3.zero;
+        aimTarget.localPosition = new Vector3(h, v, 1);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(aimTarget.position), Mathf.Deg2Rad * speed * Time.deltaTime);
     }
 
     void HorizontalLean(Transform target, float axis, float leanLimit, float lerpTime)
     {
         Vector3 targetEulerAngles = target.eulerAngles;
-        target.localEulerAngles = new Vector3(targetEulerAngles.x, targetEulerAngles.y, Mathf.LerpAngle(targetEulerAngles.z, -axis * leanLimit, lerpTime));
+        target.localEulerAngles = new Vector3(targetEulerAngles.x, targetEulerAngles.y, 0);// Mathf.LerpAngle(targetEulerAngles.z, -axis * leanLimit, lerpTime));
+        target.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(targetEulerAngles.z, -axis * leanLimit, lerpTime));// Mathf.LerpAngle(targetEulerAngles.z, -axis * leanLimit, lerpTime));
     }
 
     //private void OnDrawGizmos()
