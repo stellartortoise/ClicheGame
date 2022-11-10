@@ -22,6 +22,8 @@ public class BatMovement : MonoBehaviour
     private float mZCoord;
     private float startz;
 
+    private Vector3 screenBounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,8 @@ public class BatMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         yy = transform.localPosition.y;
-        
+
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     // Update is called once per frame
@@ -57,7 +60,7 @@ public class BatMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
-            rb.velocity += Vector3.up * 10f;
+            rb.velocity += Vector3.up * 15f;
         }
         //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
@@ -68,23 +71,35 @@ public class BatMovement : MonoBehaviour
 
     }
 
+    //private void LateUpdate()
+    //{
+    //    Vector3 viewPos = transform.position;
+
+    //    if (transform.localPosition.x < (screenBounds.x * -1) + 1)
+    //    {
+    //        rb.velocity = new Vector3(0, rb.velocity.y, 0);
+    //    }
+    //}
+
     private void LocalMove(float x, float y, float speed)
     {
         //transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
 
         rb.AddForce(Vector3.right * x * 5f);
         //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 10);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 5f);
-        //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, transform.parent.position.z);
-        
-        
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 5f); //transform.localPosition.y
+                                                                                 //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, transform.parent.position.z);
+
+
         //float xx = -(transform.localPosition.x - Input.mousePosition.x) * 0.1f;
         //float xx = Mathf.Lerp(transform.localPosition.x, Input.mousePosition.x, 0.0001f); //Mouse Position TAKES INTO ACCOUNT BOTH MONITORS
         //float yy = rb.velocity.y;
 
         //transform.localPosition = Vector3.Lerp(new Vector3(transform.localPosition.x, transform.localPosition.y, 4f), GetMouseWorldPosTarget(), 0.01f);
         //transform.localPosition = new Vector3(xx, 0, 0);
-        ClampPosition();
+        
+        
+        //ClampPosition();
     }
 
     void ClampPosition()
