@@ -22,7 +22,14 @@ public class BatMovement : MonoBehaviour
     private float mZCoord;
     private float startz;
 
+    [Space]
+
+    [SerializeField]
+    private GameManager gameManager;
+
     private Vector3 screenBounds;
+
+    private bool isInScoreZone = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +44,8 @@ public class BatMovement : MonoBehaviour
         yy = transform.localPosition.y;
 
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
+        InvokeRepeating("Score", 4, 4);
     }
 
     // Update is called once per frame
@@ -87,7 +96,7 @@ public class BatMovement : MonoBehaviour
     {
         //transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
 
-        rb.AddForce(Vector3.right * x * 5f);
+        rb.AddForce(Vector3.right * x * speed);
         //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 10);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 5f); //transform.localPosition.y
                                                                                  //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, transform.parent.position.z);
@@ -161,6 +170,40 @@ public class BatMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         rb.useGravity = true;
-        Debug.Log("Works");
+        //Debug.Log("Works");
     }
+
+    private void Score()
+    {
+        if (isInScoreZone == false)
+        {
+            gameManager.points = 1;
+            gameManager.IncreaseScore();
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        gameManager.GameOver();
+    }
+
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Score")
+    //    {
+    //        isInScoreZone = true;
+    //        gameManager.points = 15;
+    //        gameManager.IncreaseScore();
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.tag == "Score")
+    //    {
+    //        isInScoreZone = false;
+    //    }
+    //}
 }
