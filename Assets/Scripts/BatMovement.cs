@@ -57,7 +57,7 @@ public class BatMovement : MonoBehaviour
 
         //}
         //grav = tempGrav;
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
         {
             //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
             rb.velocity += Vector3.up * 15f;

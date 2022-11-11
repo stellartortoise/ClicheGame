@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class CustomImageEffect : MonoBehaviour
 {
 	/// <summary>
@@ -12,6 +12,8 @@ public class CustomImageEffect : MonoBehaviour
 	public Material EffectMaterial;
 	public float ScanDistance;
 	public int soundSpeed;
+
+	[SerializeField] private Transform bat;
 
 	private Camera _camera;
 
@@ -56,13 +58,13 @@ public class CustomImageEffect : MonoBehaviour
 		//	}
 		//}
 
-		if (ScanDistance > 200f)
+		if (ScanDistance > 40f)
 		{
 			//Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 			//Ray ray = transform.up;
 			RaycastHit hit;
 
-			if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit))
+			if (Physics.Raycast(bat.transform.position, transform.TransformDirection(Vector3.down), out hit))
 			{
 				_scanning = true;
 				ScanDistance = 0;
