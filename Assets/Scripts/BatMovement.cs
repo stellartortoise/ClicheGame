@@ -31,6 +31,8 @@ public class BatMovement : MonoBehaviour
         startz = Camera.main.transform.position.z - 7f;
 
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        StartCoroutine(startTime());
 
         yy = transform.localPosition.y;
 
@@ -155,4 +157,10 @@ public class BatMovement : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePoint);
     }
 
+    IEnumerator startTime()
+    {
+        yield return new WaitForSeconds(0.5f);
+        rb.useGravity = true;
+        Debug.Log("Works");
+    }
 }
