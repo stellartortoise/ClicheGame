@@ -35,12 +35,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _LeadSharp: 1
-    - _ScanDistance: 26.425716
+    - _ScanDistance: 12.039014
     - _ScanWidth: 12
     m_Colors:
     - _Color: {r: 0.9528302, g: 0.05842829, b: 0.05842829, a: 1}
     - _HBarColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
-    - _LeadColor: {r: 1, g: 1, b: 1, a: 0}
+    - _LeadColor: {r: 0.72300005, g: 0.72300005, b: 0.72300005, a: 0}
     - _MidColor: {r: 1, g: 1, b: 1, a: 0}
     - _TrailColor: {r: 1, g: 1, b: 1, a: 0}
     - _WorldSpaceCameraPos: {r: 0, g: 0, b: 0, a: 0}
