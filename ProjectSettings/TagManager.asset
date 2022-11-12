@@ -7,6 +7,9 @@ TagManager:
   - EndZone
   - Cave
   - Score
+  - Spawner
+  - Dolly
+  - GameManager
   layers:
   - Default
   - TransparentFX

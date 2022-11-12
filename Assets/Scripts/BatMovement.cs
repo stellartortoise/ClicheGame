@@ -31,6 +31,19 @@ public class BatMovement : MonoBehaviour
 
     private bool isInScoreZone = false;
 
+    [Space]
+    [Header("List of Prefabs to Spawn")]
+    [SerializeField]
+    private List<GameObject> segments = new List<GameObject>();
+    private List<GameObject> walls = new List<GameObject>();
+    [SerializeField]
+    private GameObject dolly;
+
+    private GameObject spawnPosition;
+    //private int segmentLength;
+    //private int wallLength;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +59,15 @@ public class BatMovement : MonoBehaviour
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
         InvokeRepeating("Score", 4, 4);
+
+        //Get rid of spawn position object for spawning in new segments
+        if (spawnPosition != null)
+        {
+            Destroy(spawnPosition);
+            spawnPosition = null;
+        }
+
+        
     }
 
     // Update is called once per frame
@@ -189,15 +211,22 @@ public class BatMovement : MonoBehaviour
     }
 
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.tag == "Score")
-    //    {
-    //        isInScoreZone = true;
-    //        gameManager.points = 15;
-    //        gameManager.IncreaseScore();
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Score")
+        {
+            int si = UnityEngine.Random.Range(0, segments.Count);
+            int wi = UnityEngine.Random.Range(0, segments.Count);
+            //isInScoreZone = true;
+            //gameManager.points = 15;
+            //gameManager.IncreaseScore();
+            spawnPosition = GameObject.FindGameObjectWithTag("Spawner");
+
+            GameObject go = Instantiate(segments[si]);
+            go.transform.position = spawnPosition.transform.position;
+            //go.dolly = dolly;
+        }
+    }
 
     //private void OnTriggerExit(Collider other)
     //{
