@@ -67,7 +67,7 @@ public class NewSegment : MonoBehaviour
         
         if (_transform.GetComponent<UnparentWaypoint>().isStartingPoint == true)
         {
-            Vector3 dollyStartPosition = new Vector3(0.23f, 0f, 20.18f - 5f);
+            Vector3 dollyStartPosition = new Vector3(0.23f, 0f, 20.18f); //z  - 5f
             _transform.position -= dollyStartPosition - new Vector3(0, 0, -5);
         }
 
