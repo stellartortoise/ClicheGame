@@ -62,7 +62,16 @@ public class NewSegment : MonoBehaviour
         //GameObject emptyGO = new GameObject(); // Because new Transform can't be made but a transform is a component of a game object
         //Transform newTransform = emptyGO.transform;
         //newTransform.position = worldPos;
-        _transform.position -= dolly.transform.position - new Vector3(0,0,-5);
+
+        //_transform.position -= dolly.transform.position - new Vector3(0,0,-5);
+        
+        if (_transform.GetComponent<UnparentWaypoint>().isStartingPoint == true)
+        {
+            Vector3 dollyStartPosition = new Vector3(0.23f, 0f, 20.18f - 5f);
+            _transform.position -= dollyStartPosition - new Vector3(0, 0, -5);
+        }
+
+
         gameManager.AddPoint(_transform);
     }
 }
