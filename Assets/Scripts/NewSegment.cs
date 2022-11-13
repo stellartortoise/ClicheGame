@@ -7,6 +7,8 @@ public class NewSegment : MonoBehaviour
     [SerializeField]
     private Transform[] transforms;
 
+    //public Vector3[] points;
+
     public GameObject dolly;
 
     [SerializeField]
@@ -33,9 +35,7 @@ public class NewSegment : MonoBehaviour
         {
             foreach (Transform _transform in transforms)
             {
-                _transform.transform.parent = dolly.transform;
-
-                gameManager.AddPoint(_transform);
+                AddPoint(_transform);
             }
         }
 
@@ -47,9 +47,22 @@ public class NewSegment : MonoBehaviour
 
         foreach (Transform _transform in transforms)
         {
-            _transform.transform.parent = dolly.transform;
-
-            gameManager.AddPoint(_transform);
+            AddPoint(_transform);
         }
+    }
+
+    void AddPoint(Transform _transform)
+    {
+        //_transform.transform.parent = dolly.transform;
+
+        //_transform.parent = null;
+
+        //Vector3 worldPos = transform.TransformPointUnscaled(_transform.position);
+
+        //GameObject emptyGO = new GameObject(); // Because new Transform can't be made but a transform is a component of a game object
+        //Transform newTransform = emptyGO.transform;
+        //newTransform.position = worldPos;
+
+        gameManager.AddPoint(_transform);
     }
 }

@@ -31,7 +31,7 @@ public class CavernCreation : MonoBehaviour
         for (int i = 0; i < transformWaypoints.Count; i++)
         {
             smoothPath.m_Waypoints[i] = new CinemachineSmoothPath.Waypoint();
-            smoothPath.m_Waypoints[i].position = transformWaypoints[i].localPosition;
+            smoothPath.m_Waypoints[i].position = transformWaypoints[i].position;
         }
 
         smoothPath.InvalidateDistanceCache();
