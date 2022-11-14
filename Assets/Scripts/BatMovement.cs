@@ -67,25 +67,25 @@ public class BatMovement : MonoBehaviour
 
         InvokeRepeating("Score", 4, 4);
 
-        ResetSpawnPoints();
+        //ResetSpawnPoints();
 
     }
 
-    private void ResetSpawnPoints()
-    {
-        //Get rid of spawn position object for spawning in new segments
-        if (spawnPosition != null)
-        {
-            Destroy(spawnPosition);
-            spawnPosition = null;
-        }
+    //private void ResetSpawnPoints()
+    //{
+    //    //Get rid of spawn position object for spawning in new segments
+    //    if (spawnPosition != null)
+    //    {
+    //        Destroy(spawnPosition);
+    //        spawnPosition = null;
+    //    }
 
-        if (wallSpawnPosition != null)
-        {
-            Destroy(wallSpawnPosition);
-            wallSpawnPosition = null;
-        }
-    }
+    //    if (wallSpawnPosition != null)
+    //    {
+    //        Destroy(wallSpawnPosition);
+    //        wallSpawnPosition = null;
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -228,37 +228,37 @@ public class BatMovement : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Score")
-        {
-            iteration++;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Score")
+    //    {
+    //        iteration++;
 
-            int si = UnityEngine.Random.Range(0, segments.Count);
-            int wi = UnityEngine.Random.Range(0, walls.Count);
-            //isInScoreZone = true;
-            //gameManager.points = 15;
-            //gameManager.IncreaseScore();
-            spawnPosition = GameObject.FindGameObjectWithTag("Spawner");
-            wallSpawnPosition = GameObject.FindGameObjectWithTag("WallSpawner");
+    //        int si = UnityEngine.Random.Range(0, segments.Count);
+    //        int wi = UnityEngine.Random.Range(0, walls.Count);
+    //        //isInScoreZone = true;
+    //        //gameManager.points = 15;
+    //        //gameManager.IncreaseScore();
+    //        spawnPosition = GameObject.FindGameObjectWithTag("Spawner");
+    //        wallSpawnPosition = GameObject.FindGameObjectWithTag("WallSpawner");
 
-            GameObject go = Instantiate(segments[si]);
-            go.transform.position = new Vector3(spawnPosition.transform.position.x, 2.21f, spawnPosition.transform.position.z); //31.46f
-            go.GetComponent<NewSegment>().prevSegment = prevSegment;
-            go.GetComponent<NewSegment>().iteration = iteration;
+    //        GameObject go = Instantiate(segments[si]);
+    //        go.transform.position = new Vector3(spawnPosition.transform.position.x, 2.21f, spawnPosition.transform.position.z); //31.46f
+    //        go.GetComponent<NewSegment>().prevSegment = prevSegment;
+    //        go.GetComponent<NewSegment>().iteration = iteration;
 
-            GameObject go2 = Instantiate(walls[wi]);
-            go2.transform.position = new Vector3(wallSpawnPosition.transform.position.x, 0.63f, wallSpawnPosition.transform.position.z);
-            go2.GetComponent<NewSegment>().prevSegment = prevSegment;
-            go2.GetComponent<NewSegment>().iteration = iteration;
-            //go.dolly = dolly;
+    //        GameObject go2 = Instantiate(walls[wi]);
+    //        go2.transform.position = new Vector3(wallSpawnPosition.transform.position.x, 0.63f, wallSpawnPosition.transform.position.z);
+    //        go2.GetComponent<NewSegment>().prevSegment = prevSegment;
+    //        go2.GetComponent<NewSegment>().iteration = iteration;
+    //        //go.dolly = dolly;
 
-            prevSegment = go;
+    //        prevSegment = go;
 
-            ResetSpawnPoints();
-            Destroy(other);
-        }
-    }
+    //        ResetSpawnPoints();
+    //        Destroy(other);
+    //    }
+    //}
 
     //private void OnTriggerExit(Collider other)
     //{
