@@ -35,13 +35,20 @@ public class BatMovement : MonoBehaviour
     [Header("List of Prefabs to Spawn")]
     [SerializeField]
     private List<GameObject> segments = new List<GameObject>();
+    [SerializeField]
     private List<GameObject> walls = new List<GameObject>();
     [SerializeField]
     private GameObject dolly;
 
     private GameObject spawnPosition;
+    private GameObject wallSpawnPosition;
+
+    [SerializeField]
+    private GameObject prevSegment;
     //private int segmentLength;
     //private int wallLength;
+
+    private int iteration = 0;
 
 
     // Start is called before the first frame update
@@ -60,6 +67,12 @@ public class BatMovement : MonoBehaviour
 
         InvokeRepeating("Score", 4, 4);
 
+        ResetSpawnPoints();
+
+    }
+
+    private void ResetSpawnPoints()
+    {
         //Get rid of spawn position object for spawning in new segments
         if (spawnPosition != null)
         {
@@ -67,7 +80,11 @@ public class BatMovement : MonoBehaviour
             spawnPosition = null;
         }
 
-        
+        if (wallSpawnPosition != null)
+        {
+            Destroy(wallSpawnPosition);
+            wallSpawnPosition = null;
+        }
     }
 
     // Update is called once per frame
@@ -215,16 +232,31 @@ public class BatMovement : MonoBehaviour
     {
         if (other.tag == "Score")
         {
+            iteration++;
+
             int si = UnityEngine.Random.Range(0, segments.Count);
-            int wi = UnityEngine.Random.Range(0, segments.Count);
+            int wi = UnityEngine.Random.Range(0, walls.Count);
             //isInScoreZone = true;
             //gameManager.points = 15;
             //gameManager.IncreaseScore();
             spawnPosition = GameObject.FindGameObjectWithTag("Spawner");
+            wallSpawnPosition = GameObject.FindGameObjectWithTag("WallSpawner");
 
             GameObject go = Instantiate(segments[si]);
-            go.transform.position = spawnPosition.transform.position;
+            go.transform.position = new Vector3(spawnPosition.transform.position.x, 2.21f, spawnPosition.transform.position.z); //31.46f
+            go.GetComponent<NewSegment>().prevSegment = prevSegment;
+            go.GetComponent<NewSegment>().iteration = iteration;
+
+            GameObject go2 = Instantiate(walls[wi]);
+            go2.transform.position = new Vector3(wallSpawnPosition.transform.position.x, 0.63f, wallSpawnPosition.transform.position.z);
+            go2.GetComponent<NewSegment>().prevSegment = prevSegment;
+            go2.GetComponent<NewSegment>().iteration = iteration;
             //go.dolly = dolly;
+
+            prevSegment = go;
+
+            ResetSpawnPoints();
+            Destroy(other);
         }
     }
 

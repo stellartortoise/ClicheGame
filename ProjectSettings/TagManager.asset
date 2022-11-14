@@ -10,6 +10,7 @@ TagManager:
   - Spawner
   - Dolly
   - GameManager
+  - WallSpawner
   layers:
   - Default
   - TransparentFX

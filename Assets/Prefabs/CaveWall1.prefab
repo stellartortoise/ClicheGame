@@ -101,10 +101,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transforms:
   - {fileID: 8865121659454977342}
-  - {fileID: 8865121661029139879}
+  prevSegment: {fileID: 0}
   dolly: {fileID: 0}
   gameManager: {fileID: 0}
   orderOfCreation: 0.1
+  iteration: 0
 --- !u!1 &8865121659454977343
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8865121659454977343}
   m_LocalRotation: {x: 0.7060037, y: -0.0093426, z: -0.029049248, w: -0.70755047}
-  m_LocalPosition: {x: -0.0028336735, y: -0.12125954, z: 0.00081884215}
+  m_LocalPosition: {x: -0.00128, y: -0.257, z: 0.00109}
   m_LocalScale: {x: -0.00092695584, y: -0.00092626014, z: -0.026057629}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -149,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14081caa6c5bdb644917a599ac72345a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStartingPoint: 0
 --- !u!1 &8865121660025963007
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8865121660025963007}
   m_LocalRotation: {x: 0.7060037, y: -0.0093426, z: -0.029049248, w: -0.70755047}
-  m_LocalPosition: {x: -0.0031, y: 0.0195, z: -0.00012}
+  m_LocalPosition: {x: -0.00144, y: -0.0986, z: 0.00039}
   m_LocalScale: {x: -0.00092695584, y: -0.00092626014, z: -0.026057629}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -193,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14081caa6c5bdb644917a599ac72345a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStartingPoint: 0
 --- !u!1 &8865121661029139876
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8865121661029139876}
   m_LocalRotation: {x: 0.7060037, y: -0.0093426, z: -0.029049248, w: -0.70755047}
-  m_LocalPosition: {x: -0.0013293206, y: -0.34185535, z: 0.00081509876}
+  m_LocalPosition: {x: -0.000271, y: -0.3413, z: 0.001012}
   m_LocalScale: {x: -0.00092695584, y: -0.00092626014, z: -0.026057629}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -237,3 +240,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14081caa6c5bdb644917a599ac72345a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStartingPoint: 0
