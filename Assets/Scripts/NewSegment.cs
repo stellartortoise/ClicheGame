@@ -82,7 +82,7 @@ public class NewSegment : MonoBehaviour
             //    //_transform.position += new Vector3(0, 0, 28.18f);
 
             //    //_transform.position = transform.TransformPoint(_transform.position);
-            float z_difference = 28.14f;
+            float z_difference = 26f; // 33, 28.14f;
             Vector3 dollyStartPosition = new Vector3(0.23f, 0f, 20.18f); //z  - 5f
             _transform.position -= dollyStartPosition - new Vector3(0, 0, -5f + (z_difference * iteration));
 
