@@ -102,9 +102,10 @@ Shader "Unlit/TestEchoShader"
 				if (dist < _ScanDistance && dist > _ScanDistance - _ScanWidth && linearDepth < 1)
 				{
 					float diff = 1 - (_ScanDistance - dist) / (_ScanWidth);
+					//half4 edge = half4(0, 0, 0, 0); //
 					half4 edge = lerp(_MidColor, _LeadColor, pow(diff, _LeadSharp));
 					scannerCol = lerp(_TrailColor, edge, diff);
-					//scannerCol = lerp(_TrailColor, edge, diff) + horizBars(i.uv) * _HBarColor;
+					//scannerCol = lerp(_TrailColor, edge, diff) + horizBars(i.uv) * _HBarColor; //
 					scannerCol *= diff;
 				}
 

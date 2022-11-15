@@ -18,7 +18,8 @@ public class CustomImageEffect : MonoBehaviour
 	private Camera _camera;
 
 	// Demo Code
-	bool _scanning;
+	[HideInInspector]
+	public bool _scanning;
     //Scannable[] _scannables;
 
     void Start()
@@ -38,6 +39,19 @@ public class CustomImageEffect : MonoBehaviour
 			//		s.Ping();
 			//}
 		}
+		//else if (!_scanning && Input.GetButtonDown("Fire2"))
+  //      {
+		//	_scanning = true;
+
+		//	RaycastHit hit;
+
+		//	if (Physics.Raycast(bat.transform.position, transform.TransformDirection(Vector3.down), out hit))
+		//	{
+		//		_scanning = true;
+		//		ScanDistance = 0;
+		//		ScannerOrigin.position = hit.point;
+		//	}
+		//}
 
 		//if (Input.GetKeyDown(KeyCode.C))
 		//{
@@ -60,17 +74,20 @@ public class CustomImageEffect : MonoBehaviour
 
 		if (ScanDistance > 40f)
 		{
-			//Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-			//Ray ray = transform.up;
-			RaycastHit hit;
+            //Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            //Ray ray = transform.up;
 
-			if (Physics.Raycast(bat.transform.position, transform.TransformDirection(Vector3.down), out hit))
-			{
-				_scanning = true;
-				ScanDistance = 0;
-				ScannerOrigin.position = hit.point;
-			}
-		}
+            //_scanning = false;
+            //ScanDistance = -10;
+            RaycastHit hit;
+
+            if (Physics.Raycast(bat.transform.position, transform.TransformDirection(Vector3.down), out hit))
+            {
+                _scanning = true;
+                ScanDistance = 0;
+                ScannerOrigin.position = hit.point;
+            }
+        }
 	}
 	// End Demo Code
 

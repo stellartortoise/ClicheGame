@@ -20,6 +20,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private BatMovement bat;
 
+    [Space]
+    [Header("Skybox Stuff")]
+    [SerializeField]
+    private Material skybox;
+    [SerializeField]
+    private GameObject directionalLight;
+    [SerializeField]
+    private CustomImageEffect cameraScript;
+
     private bool isGameOver = false;
     
 
@@ -55,6 +64,10 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
+
+        //RenderSettings.skybox = skybox;
+        cameraScript.ScanDistance = -10f;
+        directionalLight.SetActive(true);
 
         gameOver.SetActive(true);
         restartButton.SetActive(true);
