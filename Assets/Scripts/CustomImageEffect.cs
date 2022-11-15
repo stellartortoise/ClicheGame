@@ -20,13 +20,22 @@ public class CustomImageEffect : MonoBehaviour
 	// Demo Code
 	[HideInInspector]
 	public bool _scanning;
-    //Scannable[] _scannables;
+	//Scannable[] _scannables;
 
-    void Start()
+	[SerializeField]
+	private AudioSource audioSource;
+
+	[SerializeField]
+	private AudioClip[] clips;
+
+	void Start()
     {
 		//_scannables = FindObjectsOfType<Scannable>();
 		_scanning = true;
-    }
+
+		int num = UnityEngine.Random.Range(0, clips.Length);
+		audioSource.PlayOneShot(clips[num]);
+	}
 
     void Update()
 	{
@@ -86,6 +95,9 @@ public class CustomImageEffect : MonoBehaviour
                 _scanning = true;
                 ScanDistance = 0;
                 ScannerOrigin.position = hit.point;
+
+				int num = UnityEngine.Random.Range(0, clips.Length);
+				audioSource.PlayOneShot(clips[num]);
             }
         }
 	}
