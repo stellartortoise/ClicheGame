@@ -224,7 +224,7 @@ public class BatMovement : MonoBehaviour
 
     IEnumerator startTime()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f); //0.5f
         rb.useGravity = true;
         //Debug.Log("Works");
     }

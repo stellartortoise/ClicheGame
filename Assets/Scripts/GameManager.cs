@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     private GameObject gameOver, restartButton;
     [SerializeField]
     private BatMovement bat;
+    //[SerializeField]
+    //private Canvas canvas;
+    //[SerializeField]
+    //private CinemachineTrack dolly;
 
     [Space]
     [Header("Skybox Stuff")]
@@ -92,5 +96,6 @@ public class GameManager : MonoBehaviour
                 Restart();
             }
         }
+
     }
 }
