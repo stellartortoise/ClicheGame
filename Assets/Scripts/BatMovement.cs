@@ -29,6 +29,9 @@ public class BatMovement : MonoBehaviour
     private AudioSource audioSource;
 
     [SerializeField]
+    private AudioSource audioSourceNoEcho;
+
+    [SerializeField]
     private AudioClip[] clips;
 
     [Space]
@@ -121,13 +124,13 @@ public class BatMovement : MonoBehaviour
             //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
             rb.velocity += Vector3.up * 15f;
 
-            if (audioSource.isPlaying)
+            if (audioSourceNoEcho.isPlaying)
             {
-                audioSource.Stop();
+                audioSourceNoEcho.Stop();
             }
 
             int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
-            audioSource.PlayOneShot(clips[getClipNumber]);
+            audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
         }
         //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
