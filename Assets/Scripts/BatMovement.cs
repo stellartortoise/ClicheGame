@@ -244,6 +244,7 @@ public class BatMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        audioSource.Stop();
         gameManager.GameOver();
     }
 
