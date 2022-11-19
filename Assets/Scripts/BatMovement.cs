@@ -8,9 +8,12 @@ public class BatMovement : MonoBehaviour
     /// <summary>
     /// Some of this code taken from youtuber Mix and Jam
     /// </summary>
-    public float xySpeed = 18f;
+    public float xySpeed = 18f;// 18f;
     public Transform aimTarget;
     public float lookSpeed;
+
+    private float startx, prevx;
+    private Vector3 leftPos, rightPos, centrePos;
 
     private float grav = 0.01f;
     private float yy;
@@ -86,6 +89,13 @@ public class BatMovement : MonoBehaviour
 
         //ResetSpawnPoints();
 
+        startx = transform.localPosition.x;
+
+        leftPos = new Vector3(startx - 0.5f, transform.position.y, 5f);
+        rightPos = new Vector3(startx + 0.5f, transform.position.y, 5f);
+        centrePos = new Vector3(startx, transform.position.y, 5f);
+
+
     }
 
     //private void ResetSpawnPoints()
@@ -127,7 +137,7 @@ public class BatMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
         {
             //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
-            rb.velocity += Vector3.up * 15f;
+            rb.velocity += Vector3.up * 7f; //15
             animator.Play("Flying", -1, 0f);
 
             if (audioSourceNoEcho.isPlaying)
@@ -159,11 +169,38 @@ public class BatMovement : MonoBehaviour
 
     private void LocalMove(float x, float y, float speed)
     {
-        //transform.localPosition += new Vector3(x, y, 0) * speed * Time.deltaTime;
+        transform.localPosition += new Vector3(x, 0, 0) * speed * Time.deltaTime;
+        x = Mathf.Clamp(x, -0.5f, 0.5f);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 5f); //Original Movement Line
+        //if (x < -0.2f)
+        //{
+        //    //transform.localPosition = new Vector3(Mathf.Lerp(startx, startx - 0.5f, 0.5f), transform.localPosition.y, 5f);
+        //    //prevx = startx - 0.5f;
+        //    transform.localPosition = Vector3.Lerp(transform.localPosition, leftPos, 0.5f);
+        //}
+        //else if (x > 0.2f)
+        //{
+        //    //transform.localPosition = new Vector3(Mathf.Lerp(startx, startx + 0.5f, 0.5f), transform.localPosition.y, 5f);
+        //    //prevx = startx -+ 0.5f;
+        //    transform.localPosition = Vector3.Lerp(transform.localPosition, rightPos, 0.5f);
+        //}
+        //else
+        //{
+        //    //
+        //    //transform.localPosition = new Vector3(Mathf.Lerp(prevx, startx, 0.5f), transform.localPosition.y, 5f);
+        //    if (x != 0)
+        //    {
+        //        transform.localPosition = Vector3.Lerp(transform.localPosition, centrePos, 0.5f);
+        //    }
+        //    else
+        //    {
+        //        transform.localPosition = new Vector3(startx, transform.localPosition.y, 5f);
+        //    }
 
-        rb.AddForce(Vector3.right * x * speed);
+        //}
+        //rb.AddForce(Vector3.right * x * speed);
         //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 10);
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 5f); //transform.localPosition.y
+         //transform.localPosition.y
                                                                                  //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, transform.parent.position.z);
 
 
