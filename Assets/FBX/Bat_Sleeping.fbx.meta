@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 0768ac9c17467cf499747e6006b3d64b
+guid: 23e0a4a05bda53d4ab0df761084c5941
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable:
+  - first:
+      74: 1354083256325142241
+    second: Sleep
   - first:
       74: -3100369314251171874
     second: Idle
@@ -10,8 +13,11 @@ ModelImporter:
       74: -4526551656673740845
     second: Flying
   - first:
-      74: -2755531118510053381
-    second: Armature|Flying
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
+  - first:
+      74: 5754330143168782828
+    second: Armature|Sleep
   externalObjects: {}
   materials:
     materialImportMode: 2

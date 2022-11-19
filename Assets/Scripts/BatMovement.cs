@@ -21,6 +21,11 @@ public class BatMovement : MonoBehaviour
 
     private float mZCoord;
     private float startz;
+    [Space]
+    [Header("Sound Effects")]
+
+    [SerializeField]
+    private Animator animator;
 
     [Space]
     [Header("Sound Effects")]
@@ -123,6 +128,7 @@ public class BatMovement : MonoBehaviour
         {
             //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
             rb.velocity += Vector3.up * 15f;
+            animator.Play("Flying", -1, 0f);
 
             if (audioSourceNoEcho.isPlaying)
             {
