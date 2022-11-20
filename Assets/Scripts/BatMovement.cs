@@ -147,13 +147,14 @@ public class BatMovement : MonoBehaviour
             {
                 //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
                 rb.velocity += Vector3.up * 7f; //15
+                
+
+                //if (audioSourceNoEcho.isPlaying)
+                //{
+                //    audioSourceNoEcho.Stop();
+                //}
+
                 animator.Play("Flying", -1, 0f);
-
-                if (audioSourceNoEcho.isPlaying)
-                {
-                    audioSourceNoEcho.Stop();
-                }
-
                 int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
                 audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
             }
