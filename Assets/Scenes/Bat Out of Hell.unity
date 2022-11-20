@@ -522,8 +522,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Victory!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
+  m_sharedMaterial: {fileID: 8160658833067002594, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6889,8 +6889,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Press "Start" or "Enter"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
+  m_sharedMaterial: {fileID: 8160658833067002594, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6950,7 +6950,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -364.19745, y: 0, z: -435.55283, w: 0}
+  m_margin: {x: -364.19745, y: -73.798096, z: -435.55283, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8199,6 +8199,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 61abc573b5a0c414486a041278e6efa6, type: 3}
   - {fileID: 8300000, guid: 1967deaa92133ce47a9d22dfabe5ef1d, type: 3}
   - {fileID: 8300000, guid: 2cb1b8c8a67d5c844bae1867e91b0117, type: 3}
+  crashClips:
+  - {fileID: 8300000, guid: c3f476510496ec04682cd71c52333e89, type: 3}
+  - {fileID: 8300000, guid: 4bad390b28afcf247879908f12ba8b2e, type: 3}
+  - {fileID: 8300000, guid: 29b62304412f7014e853f045f8297137, type: 3}
+  - {fileID: 8300000, guid: 81d30aaa60938534cb84490158a78ddb, type: 3}
+  - {fileID: 8300000, guid: 89fd17416a11a4940a26ef60f4cbbaaa, type: 3}
+  - {fileID: 8300000, guid: b1f17a439a5f41b4988953240bd5c029, type: 3}
+  - {fileID: 8300000, guid: db61912fbc587124a96a74d5818497cf, type: 3}
   gameManager: {fileID: 524628009}
   segments:
   - {fileID: 3188649295259461454, guid: fee8868370dbf1b44aab20a53c220f6a, type: 3}
@@ -10584,8 +10592,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 79%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
+  m_sharedMaterial: {fileID: 8160658833067002594, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10645,7 +10653,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -303.15112, y: -54.657272, z: -303.19983, w: -40.724525}
+  m_margin: {x: -303.15112, y: -62.76014, z: -303.19983, w: -40.724525}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -11373,8 +11381,8 @@ MonoBehaviour:
 
     Through the Cave'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
+  m_sharedMaterial: {fileID: 8160658833067002594, guid: c37fe6338d2aa65478325f460af0deae, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

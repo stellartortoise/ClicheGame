@@ -44,6 +44,9 @@ public class BatMovement : MonoBehaviour
     [SerializeField]
     private AudioClip[] clips;
 
+    [SerializeField]
+    private AudioClip[] crashClips;
+
     [Space]
 
     [SerializeField]
@@ -125,42 +128,42 @@ public class BatMovement : MonoBehaviour
         if (!won)
         {
             LocalMove(h, v, xySpeed);
-        }
-        
-        //RotationLook(h, v, lookSpeed);
-        HorizontalLean(playerModel, h, 45, 0.1f);
 
-        //var tempGrav = grav;
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
 
-        //    grav = 0;
-        //    //yy += 2f;
-        //    transform.localPosition += new Vector3(0, 2f, 0);
+            //RotationLook(h, v, lookSpeed);
+            HorizontalLean(playerModel, h, 45, 0.1f);
 
-        //}
-        //grav = tempGrav;
-        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
-        {
-            //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
-            rb.velocity += Vector3.up * 7f; //15
-            animator.Play("Flying", -1, 0f);
+            //var tempGrav = grav;
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
 
-            if (audioSourceNoEcho.isPlaying)
+            //    grav = 0;
+            //    //yy += 2f;
+            //    transform.localPosition += new Vector3(0, 2f, 0);
+
+            //}
+            //grav = tempGrav;
+            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
             {
-                audioSourceNoEcho.Stop();
+                //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
+                rb.velocity += Vector3.up * 7f; //15
+                animator.Play("Flying", -1, 0f);
+
+                if (audioSourceNoEcho.isPlaying)
+                {
+                    audioSourceNoEcho.Stop();
+                }
+
+                int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
+                audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
             }
+            //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
-            int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
-            audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
+            //if (transform.localPosition.y > pos.y)
+            //{
+            //    yy -= grav;
+            //}
         }
-        //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-
-        //if (transform.localPosition.y > pos.y)
-        //{
-        //    yy -= grav;
-        //}
-
     }
 
     //private void LateUpdate()
@@ -295,6 +298,9 @@ public class BatMovement : MonoBehaviour
     {
         if (!won)
         {
+            int i = UnityEngine.Random.Range(0, crashClips.Length);
+
+            audioSourceNoEcho.PlayOneShot(crashClips[i]);
             audioSource.Stop();
             gameManager.GameOver();
         }
