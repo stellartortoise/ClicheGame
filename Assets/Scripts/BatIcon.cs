@@ -10,6 +10,7 @@ public class BatIcon : MonoBehaviour
     private CinemachineDollyCart dolly;
     
     private Slider slider;
+    public float percentage;
 
 
     private void Start()
@@ -20,6 +21,8 @@ public class BatIcon : MonoBehaviour
     void Update()
     {
         slider.value = dolly.m_Position;
+        percentage = (dolly.m_Position / 248.646f) * 100f;
+        percentage = Mathf.Clamp(percentage, 0f, 100f);
     }
 
 

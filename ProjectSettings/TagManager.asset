@@ -11,6 +11,7 @@ TagManager:
   - Dolly
   - GameManager
   - WallSpawner
+  - LevelEnd
   layers:
   - Default
   - TransparentFX

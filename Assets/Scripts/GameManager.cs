@@ -16,13 +16,15 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
-    private GameObject gameOver, restartButton;
+    private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete;
     [SerializeField]
     private BatMovement bat;
     //[SerializeField]
     //private Canvas canvas;
     //[SerializeField]
-    //private CinemachineTrack dolly;
+    //private BatIcon batIcon;
+
+    public Camera _camera;
 
     [Space]
     [Header("Skybox Stuff")]
@@ -75,6 +77,10 @@ public class GameManager : MonoBehaviour
 
         gameOver.SetActive(true);
         restartButton.SetActive(true);
+        slider.SetActive(false);
+
+        
+        percentComplete.SetActive(true);
 
         Pause();
     }
@@ -85,6 +91,21 @@ public class GameManager : MonoBehaviour
         score += points;
         //int finalScore = (int)Mathf.Lerp(prevScore, score, 0.1f);
         scoreText.text = score.ToString();
+    }
+
+    public void Win()
+    {
+        slider.SetActive(false);
+        pointMarker.SetActive(false);
+        winText.SetActive(true);
+
+        gameOver.SetActive(true);
+        restartButton.SetActive(true);
+        percentComplete.SetActive(true);
+
+        isGameOver = true;
+
+        _camera.transform.parent = null;
     }
 
     private void Update()
