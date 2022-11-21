@@ -125,7 +125,7 @@ public class BatMovement : MonoBehaviour
         float h = Input.GetAxis("Horizontal");// Input.GetAxis("Mouse X");
         float v = Input.GetAxis("Vertical");// Input.GetAxis("Mouse Y");
 
-        if (!won)
+        if (won == false && gameManager.isPaused == false)
         {
             LocalMove(h, v, xySpeed);
 

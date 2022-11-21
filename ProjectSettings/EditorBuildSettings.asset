@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 5df5eed45ab6a6a459d12792badc7df7
+  - enabled: 1
     path: Assets/Scenes/Bat Out of Hell.unity
     guid: e9a536729ac21e44fadba59196d44d0e
   m_configObjects: {}

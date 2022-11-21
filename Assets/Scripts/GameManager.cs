@@ -16,13 +16,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
-    private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete;
+    private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete, paused;
     [SerializeField]
     private BatMovement bat;
     //[SerializeField]
     //private Canvas canvas;
     //[SerializeField]
     //private BatIcon batIcon;
+    [SerializeField]
+    private AudioManager audioManager;
+    [SerializeField]
+    private AudioClip clip;
 
     public Camera _camera;
 
@@ -36,6 +40,7 @@ public class GameManager : MonoBehaviour
     private CustomImageEffect cameraScript;
 
     private bool isGameOver = false;
+    public bool isPaused = false;
     
 
     private void Awake()
@@ -65,6 +70,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         bat.enabled = false;
+    }
+
+    private void Paused()
+    {
+        Time.timeScale = 0;
+        paused.SetActive(true);
     }
 
     public void GameOver()
@@ -115,6 +126,26 @@ public class GameManager : MonoBehaviour
             if (Input.GetButtonDown("Submit")) //(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
             {
                 Restart();
+            }
+        }
+        
+        if (isGameOver == false && Input.GetButtonDown("Submit"))
+        {
+            isPaused = !isPaused;
+
+            if (isPaused)
+            {
+                Paused();
+            }
+            else
+            {
+                Time.timeScale = 1;
+                paused.SetActive(false);
+            }
+
+            if (!audioManager.audioSource.isPlaying)
+            {
+                audioManager.audioSource.PlayOneShot(clip);
             }
         }
 
