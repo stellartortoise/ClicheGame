@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
-    private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete, paused;
+    private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete, paused, newRecord;
     [SerializeField]
     private BatMovement bat;
     //[SerializeField]
