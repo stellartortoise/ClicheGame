@@ -11,11 +11,13 @@ public class PressStart : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip clip;
+    [SerializeField]
+    private float blinkTime = 0.5f, fastBlinkTime = 0.1f;
 
     private void Start()
     {
         image = GetComponent<Image>();
-        InvokeRepeating("Timer", 0.5f, 0.5f);
+        InvokeRepeating("Timer", blinkTime, blinkTime);
         audioSource = GetComponent<AudioSource>();
         
     }
@@ -30,9 +32,11 @@ public class PressStart : MonoBehaviour
             {
                 audioSource.PlayOneShot(clip);
                 CancelInvoke("Timer");
+                InvokeRepeating("Timer", fastBlinkTime, fastBlinkTime);
                 StartCoroutine(GoToNextRoom());
             }
-            image.enabled = false;
+            //image.enabled = false;
+            
         }
     }
 
@@ -48,7 +52,7 @@ public class PressStart : MonoBehaviour
 
     IEnumerator GoToNextRoom()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.9f);
         GoToGame();
     }
 }
