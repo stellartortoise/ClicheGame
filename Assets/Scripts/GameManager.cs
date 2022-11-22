@@ -13,12 +13,17 @@ public class GameManager : MonoBehaviour
     public int score, points;
     private int prevScore;
 
+    public static int staticScore;
+    public static int highScore;
+
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
     private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete, paused, newRecord;
     [SerializeField]
     private BatMovement bat;
+    [SerializeField]
+    private BatIcon percentage;
     //[SerializeField]
     //private Canvas canvas;
     //[SerializeField]
@@ -27,6 +32,9 @@ public class GameManager : MonoBehaviour
     private AudioManager audioManager;
     [SerializeField]
     private AudioClip clip;
+
+    [SerializeField]
+    private Animator animator;
 
     public Camera _camera;
 
@@ -41,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     private bool isGameOver = false;
     public bool isPaused = false;
+    private bool hasWon = false;
     
 
     private void Awake()
@@ -48,6 +57,12 @@ public class GameManager : MonoBehaviour
         //Application.targetFrameRate = 60;
 
         //Pause();
+    }
+
+    private void Start()
+    {
+        staticScore = 0;
+        highScore = PlayerPrefs.GetInt("Highscore", highScore);
     }
 
     public void Restart()
@@ -58,10 +73,22 @@ public class GameManager : MonoBehaviour
         restartButton.SetActive(false);
         gameOver.SetActive(false);
 
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; //1
         bat.enabled = true;
 
-        SceneManager.LoadScene("Bat Out of Hell");
+        if (hasWon == false)
+        {
+            //animator.Play("Base Layer.Crossfade_Begin", -1);
+            //StartCoroutine(RestartLevel());
+            SceneManager.LoadScene("Bat Out of Hell");
+        }
+        else
+        {
+            //animator.Play("Base Layer.Crossfade_Begin", -1);
+            //StartCoroutine(GoToMenu());
+            SceneManager.LoadScene("Menu");
+        }
+        
 
 
     }
@@ -94,6 +121,15 @@ public class GameManager : MonoBehaviour
         percentComplete.SetActive(true);
 
         Pause();
+
+        if (staticScore > highScore)
+        {
+            highScore = staticScore;
+
+            PlayerPrefs.SetInt("Highscore", highScore);
+
+            newRecord.SetActive(true);
+        }
     }
 
     public void IncreaseScore()
@@ -115,6 +151,7 @@ public class GameManager : MonoBehaviour
         percentComplete.SetActive(true);
 
         isGameOver = true;
+        hasWon = true;
 
         _camera.transform.parent = null;
     }
@@ -153,5 +190,19 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        staticScore = Mathf.RoundToInt(percentage.percentage);
+
+    }
+
+    IEnumerator GoToMenu()
+    {
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene("Menu");
+    }
+
+    IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(0.3f);
+        SceneManager.LoadScene("Bat Out of Hell");
     }
 }

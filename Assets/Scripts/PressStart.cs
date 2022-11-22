@@ -14,6 +14,11 @@ public class PressStart : MonoBehaviour
     [SerializeField]
     private float blinkTime = 0.5f, fastBlinkTime = 0.1f;
 
+    [SerializeField]
+    private Animator transition;
+    [SerializeField]
+    private float transitionTime = 0.5f;
+
     private void Start()
     {
         image = GetComponent<Image>();
@@ -52,7 +57,16 @@ public class PressStart : MonoBehaviour
 
     IEnumerator GoToNextRoom()
     {
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(0.2f);
+        StartCoroutine(StartCrossfade());
+    }
+
+    IEnumerator StartCrossfade()
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
         GoToGame();
     }
 }
