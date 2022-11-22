@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
     [SerializeField]
-    private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete, paused, newRecord;
+    private GameObject gameOver, restartButton, winText, slider, pointMarker, percentComplete, paused, newRecord, howToPlay;
     [SerializeField]
     private BatMovement bat;
     [SerializeField]
@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
         gameOver.SetActive(true);
         restartButton.SetActive(true);
         slider.SetActive(false);
+        howToPlay.SetActive(false);
 
         
         percentComplete.SetActive(true);
