@@ -165,6 +165,11 @@ public class BatMovement : MonoBehaviour
             //    yy -= grav;
             //}
         }
+
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
+        }
     }
 
     //private void LateUpdate()
@@ -345,6 +350,7 @@ public class BatMovement : MonoBehaviour
             gameManager.Win();
             won = true;
             rb.useGravity = false;
+            animator.SetBool("GameEnd", true);
         }
 
     }

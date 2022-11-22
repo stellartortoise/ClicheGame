@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public int score, points;
     private int prevScore;
 
-    public static int staticScore;
-    public static int highScore;
+    //public static int staticScore;
+    //public static int highScore;
 
     [SerializeField]
     private TextMeshProUGUI scoreText;
@@ -61,8 +61,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        staticScore = 0;
-        highScore = PlayerPrefs.GetInt("Highscore", highScore);
+        //staticScore = 0;
+        //highScore = PlayerPrefs.GetInt("Highscore", highScore);
     }
 
     public void Restart()
@@ -123,14 +123,14 @@ public class GameManager : MonoBehaviour
 
         Pause();
 
-        if (staticScore > highScore)
-        {
-            highScore = staticScore;
+        //if (staticScore > highScore)
+        //{
+        //    highScore = staticScore;
 
-            PlayerPrefs.SetInt("Highscore", highScore);
+        //    PlayerPrefs.SetInt("Highscore", highScore);
 
-            newRecord.SetActive(true);
-        }
+        //    newRecord.SetActive(true);
+        //}
     }
 
     public void IncreaseScore()
@@ -191,7 +191,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        staticScore = Mathf.RoundToInt(percentage.percentage);
+        //staticScore = Mathf.RoundToInt(percentage.percentage);
 
     }
 

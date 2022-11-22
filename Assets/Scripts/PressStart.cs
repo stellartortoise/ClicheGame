@@ -24,7 +24,9 @@ public class PressStart : MonoBehaviour
         image = GetComponent<Image>();
         InvokeRepeating("Timer", blinkTime, blinkTime);
         audioSource = GetComponent<AudioSource>();
-        
+
+        //PlayerPrefs.SetInt("Highscore", 0);
+
     }
 
     private void Update()
@@ -42,6 +44,11 @@ public class PressStart : MonoBehaviour
             }
             //image.enabled = false;
             
+        }
+
+        if (Input.GetKeyDown("escape"))
+        {
+            Application.Quit();
         }
     }
 
