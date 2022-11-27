@@ -70,8 +70,6 @@ public class BatMovement : MonoBehaviour
 
     [SerializeField]
     private GameObject prevSegment;
-    //private int segmentLength;
-    //private int wallLength;
 
     private int iteration = 0;
 
@@ -92,8 +90,6 @@ public class BatMovement : MonoBehaviour
 
         InvokeRepeating("Score", 4, 4);
 
-        //ResetSpawnPoints();
-
         startx = transform.localPosition.x;
 
         leftPos = new Vector3(startx - 0.5f, transform.position.y, 5f);
@@ -102,22 +98,6 @@ public class BatMovement : MonoBehaviour
 
 
     }
-
-    //private void ResetSpawnPoints()
-    //{
-    //    //Get rid of spawn position object for spawning in new segments
-    //    if (spawnPosition != null)
-    //    {
-    //        Destroy(spawnPosition);
-    //        spawnPosition = null;
-    //    }
-
-    //    if (wallSpawnPosition != null)
-    //    {
-    //        Destroy(wallSpawnPosition);
-    //        wallSpawnPosition = null;
-    //    }
-    //}
 
     // Update is called once per frame
     void Update()
@@ -128,21 +108,8 @@ public class BatMovement : MonoBehaviour
         if (won == false && gameManager.isPaused == false)
         {
             LocalMove(h, v, xySpeed);
-
-
-            //RotationLook(h, v, lookSpeed);
             HorizontalLean(playerModel, h, 45, 0.1f);
 
-            //var tempGrav = grav;
-            //if (Input.GetKeyDown(KeyCode.Space))
-            //{
-
-            //    grav = 0;
-            //    //yy += 2f;
-            //    transform.localPosition += new Vector3(0, 2f, 0);
-
-            //}
-            //grav = tempGrav;
             if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
             {
                 //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
@@ -158,12 +125,7 @@ public class BatMovement : MonoBehaviour
                 int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
                 audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
             }
-            //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
 
-            //if (transform.localPosition.y > pos.y)
-            //{
-            //    yy -= grav;
-            //}
         }
 
         if (Input.GetKeyDown("escape"))
@@ -172,84 +134,13 @@ public class BatMovement : MonoBehaviour
         }
     }
 
-    //private void LateUpdate()
-    //{
-    //    Vector3 viewPos = transform.position;
-
-    //    if (transform.localPosition.x < (screenBounds.x * -1) + 1)
-    //    {
-    //        rb.velocity = new Vector3(0, rb.velocity.y, 0);
-    //    }
-    //}
-
     private void LocalMove(float x, float y, float speed)
     {
         transform.localPosition += new Vector3(x, 0, 0) * speed * Time.deltaTime;
         x = Mathf.Clamp(x, -0.5f, 0.5f);
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 5f); //Original Movement Line
-        //if (x < -0.2f)
-        //{
-        //    //transform.localPosition = new Vector3(Mathf.Lerp(startx, startx - 0.5f, 0.5f), transform.localPosition.y, 5f);
-        //    //prevx = startx - 0.5f;
-        //    transform.localPosition = Vector3.Lerp(transform.localPosition, leftPos, 0.5f);
-        //}
-        //else if (x > 0.2f)
-        //{
-        //    //transform.localPosition = new Vector3(Mathf.Lerp(startx, startx + 0.5f, 0.5f), transform.localPosition.y, 5f);
-        //    //prevx = startx -+ 0.5f;
-        //    transform.localPosition = Vector3.Lerp(transform.localPosition, rightPos, 0.5f);
-        //}
-        //else
-        //{
-        //    //
-        //    //transform.localPosition = new Vector3(Mathf.Lerp(prevx, startx, 0.5f), transform.localPosition.y, 5f);
-        //    if (x != 0)
-        //    {
-        //        transform.localPosition = Vector3.Lerp(transform.localPosition, centrePos, 0.5f);
-        //    }
-        //    else
-        //    {
-        //        transform.localPosition = new Vector3(startx, transform.localPosition.y, 5f);
-        //    }
-
-        //}
-        //rb.AddForce(Vector3.right * x * speed);
-        //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, 10);
-         //transform.localPosition.y
-                                                                                 //rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, transform.parent.position.z);
-
-
-        //float xx = -(transform.localPosition.x - Input.mousePosition.x) * 0.1f;
-        //float xx = Mathf.Lerp(transform.localPosition.x, Input.mousePosition.x, 0.0001f); //Mouse Position TAKES INTO ACCOUNT BOTH MONITORS
-        //float yy = rb.velocity.y;
-
-        //transform.localPosition = Vector3.Lerp(new Vector3(transform.localPosition.x, transform.localPosition.y, 4f), GetMouseWorldPosTarget(), 0.01f);
-        //transform.localPosition = new Vector3(xx, 0, 0);
-        
-        
-        //ClampPosition();
     }
 
-    void ClampPosition()
-    {
-        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        pos.x = Mathf.Clamp01(pos.x);
-        pos.y = Mathf.Clamp01(pos.y);
-        transform.position = Camera.main.ViewportToWorldPoint(pos);
-        
-    }
-
-    void RotationLook(float h, float v, float speed)
-    {
-        ////aimTarget.parent.position = Vector3.zero;
-        //aimTarget.localPosition = new Vector3(h, v, 5f);
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(GetMouseWorldPosTarget()), Mathf.Deg2Rad * speed);
-
-        //aimTarget.parent.position = Vector3.zero;
-        //aimTarget.position = Vector3.zero;
-        aimTarget.localPosition = new Vector3(h, v, 1);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(aimTarget.position), Mathf.Deg2Rad * speed * Time.deltaTime);
-    }
 
     void HorizontalLean(Transform target, float axis, float leanLimit, float lerpTime)
     {
@@ -257,13 +148,6 @@ public class BatMovement : MonoBehaviour
         target.localEulerAngles = new Vector3(targetEulerAngles.x, targetEulerAngles.y, 0);// Mathf.LerpAngle(targetEulerAngles.z, -axis * leanLimit, lerpTime));
         target.localEulerAngles = new Vector3(0, 0, Mathf.LerpAngle(targetEulerAngles.z, -axis * leanLimit, lerpTime));// Mathf.LerpAngle(targetEulerAngles.z, -axis * leanLimit, lerpTime));
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(aimTarget.position, 0.5f);
-    //    Gizmos.DrawSphere(aimTarget.position, 0.15f);
-    //}
 
     private Vector3 GetMouseWorldPos()
     {
@@ -287,7 +171,6 @@ public class BatMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); //0.5f
         rb.useGravity = true;
-        //Debug.Log("Works");
     }
 
     private void Score()
@@ -316,34 +199,6 @@ public class BatMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.tag == "Score")
-        //{
-        //    iteration++;
-
-        //    int si = UnityEngine.Random.Range(0, segments.Count);
-        //    int wi = UnityEngine.Random.Range(0, walls.Count);
-        //    //isInScoreZone = true;
-        //    //gameManager.points = 15;
-        //    //gameManager.IncreaseScore();
-        //    spawnPosition = GameObject.FindGameObjectWithTag("Spawner");
-        //    wallSpawnPosition = GameObject.FindGameObjectWithTag("WallSpawner");
-
-        //    GameObject go = Instantiate(segments[si]);
-        //    go.transform.position = new Vector3(spawnPosition.transform.position.x, 2.21f, spawnPosition.transform.position.z); //31.46f
-        //    go.GetComponent<NewSegment>().prevSegment = prevSegment;
-        //    go.GetComponent<NewSegment>().iteration = iteration;
-
-        //    GameObject go2 = Instantiate(walls[wi]);
-        //    go2.transform.position = new Vector3(wallSpawnPosition.transform.position.x, 0.63f, wallSpawnPosition.transform.position.z);
-        //    go2.GetComponent<NewSegment>().prevSegment = prevSegment;
-        //    go2.GetComponent<NewSegment>().iteration = iteration;
-        //    //go.dolly = dolly;
-
-        //    prevSegment = go;
-
-        //    ResetSpawnPoints();
-        //    Destroy(other);
-        //}
 
         if (other.tag == "LevelEnd")
         {
@@ -355,11 +210,4 @@ public class BatMovement : MonoBehaviour
 
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Score")
-    //    {
-    //        isInScoreZone = false;
-    //    }
-    //}
 }

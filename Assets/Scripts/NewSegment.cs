@@ -56,17 +56,6 @@ public class NewSegment : MonoBehaviour
 
     void AddPoint(Transform _transform)
     {
-        //_transform.transform.parent = dolly.transform;
-
-        //_transform.parent = null;
-
-        //Vector3 worldPos = transform.TransformPointUnscaled(_transform.position);
-
-        //GameObject emptyGO = new GameObject(); // Because new Transform can't be made but a transform is a component of a game object
-        //Transform newTransform = emptyGO.transform;
-        //newTransform.position = worldPos;
-
-        //_transform.position -= dolly.transform.position - new Vector3(0,0,-5);
 
         if (_transform.GetComponent<UnparentWaypoint>().isStartingPoint == true)
         {
@@ -75,13 +64,6 @@ public class NewSegment : MonoBehaviour
         }
         else
         {
-            //    //Vector3 dollyStartPosition = new Vector3(0.23f, 0f, 20.18f);// + prevSegment.transform.position; //z  - 5f
-            //    //    //_transform.position -= dollyStartPosition - new Vector3(0, 0, -5);
-            //    //_transform.position -= dollyStartPosition - new Vector3(0, 0, -5) - prevSegment.transform.position;
-            //    //_transform.position += new Vector3(0, 0, prevSegment.transform.position.z);
-            //    //_transform.position += new Vector3(0, 0, 28.18f);
-
-            //    //_transform.position = transform.TransformPoint(_transform.position);
             float z_difference = 26f; // 33, 28.14f;
             Vector3 dollyStartPosition = new Vector3(0.23f, 0f, 20.18f); //z  - 5f
             _transform.position -= dollyStartPosition - new Vector3(0, 0, -5f + (z_difference * iteration));

@@ -6,7 +6,7 @@ using UnityEngine;
 public class CustomImageEffect : MonoBehaviour
 {
 	/// <summary>
-	/// CODE THANKS TO YOUTUBER Makin' Stuff Look Good
+	/// Some of the CODE THANKS TO YOUTUBER Makin' Stuff Look Good
 	/// </summary>
 	public Transform ScannerOrigin;
 	public Material EffectMaterial;
@@ -20,7 +20,6 @@ public class CustomImageEffect : MonoBehaviour
 	// Demo Code
 	[HideInInspector]
 	public bool _scanning;
-	//Scannable[] _scannables;
 
 	[SerializeField]
 	private AudioSource audioSource;
@@ -30,7 +29,6 @@ public class CustomImageEffect : MonoBehaviour
 
 	void Start()
     {
-		//_scannables = FindObjectsOfType<Scannable>();
 		_scanning = true;
 
 		int num = UnityEngine.Random.Range(0, clips.Length);
@@ -42,52 +40,12 @@ public class CustomImageEffect : MonoBehaviour
 		if (_scanning)
 		{
 			ScanDistance += Time.deltaTime * soundSpeed;//50;
-			//foreach (Scannable s in _scannables)
-			//{
-			//	if (Vector3.Distance(ScannerOrigin.position, s.transform.position) <= ScanDistance)
-			//		s.Ping();
-			//}
 		}
-		//else if (!_scanning && Input.GetButtonDown("Fire2"))
-  //      {
-		//	_scanning = true;
 
-		//	RaycastHit hit;
-
-		//	if (Physics.Raycast(bat.transform.position, transform.TransformDirection(Vector3.down), out hit))
-		//	{
-		//		_scanning = true;
-		//		ScanDistance = 0;
-		//		ScannerOrigin.position = hit.point;
-		//	}
-		//}
-
-		//if (Input.GetKeyDown(KeyCode.C))
-		//{
-		//	_scanning = true;
-		//	ScanDistance = 0;
-		//}
-
-		//if (Input.GetMouseButtonDown(0))
-		//{
-		//	Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-		//	RaycastHit hit;
-
-		//	if (Physics.Raycast(ray, out hit))
-		//	{
-		//		_scanning = true;
-		//		ScanDistance = 0;
-		//		ScannerOrigin.position = hit.point;
-		//	}
-		//}
 
 		if (ScanDistance > 40f)
 		{
-            //Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-            //Ray ray = transform.up;
 
-            //_scanning = false;
-            //ScanDistance = -10;
             RaycastHit hit;
 
             if (Physics.Raycast(bat.transform.position, transform.TransformDirection(Vector3.down), out hit))

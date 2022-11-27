@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver)
         {
-            if (Input.GetButtonDown("Submit")) //(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
+            if (Input.GetButtonDown("Submit"))
             {
                 //if (!audioManager.audioSource.isPlaying)
                 //{
