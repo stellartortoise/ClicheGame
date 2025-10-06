@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class BatMovement : MonoBehaviour
 {
@@ -73,6 +76,20 @@ public class BatMovement : MonoBehaviour
 
     private int iteration = 0;
 
+    private bool isFlying = false;
+    private float flyTimeCounter = 0f;
+    [SerializeField]
+    private float maxFlyTime = 0.8f; // Adjust for desired "hold" duration
+    [SerializeField]
+    private float flyForce = 1.5f;     // Upward force while holding // Was 7f
+    private float maxFlyForce = 3f;
+    private float currentVelocity;
+    private bool flyPressed;
+    private bool canPress = true;
+    private float H, V;
+    [SerializeField] private InputAction moveAction;
+    [SerializeField] private InputAction flyAction;
+
 
     // Start is called before the first frame update
     void Start()
@@ -102,37 +119,86 @@ public class BatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");// Input.GetAxis("Mouse X");
-        float v = Input.GetAxis("Vertical");// Input.GetAxis("Mouse Y");
+        if (won || gameManager.isPaused) return;
 
-        if (won == false && gameManager.isPaused == false)
-        {
-            LocalMove(h, v, xySpeed);
-            HorizontalLean(playerModel, h, 45, 0.1f);
+        Vector2 moveInput = moveAction.ReadValue<Vector2>();
+        float moveValue = Mathf.Clamp(moveInput.x, -1f, 1f);
 
-            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
-            {
-                //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
-                rb.velocity += Vector3.up * 7f; //15
-                
+        transform.localPosition += new Vector3(moveValue, 0, 0) * xySpeed * Time.deltaTime;
+        HorizontalLean(playerModel, moveValue, 45, 0.1f);
 
-                //if (audioSourceNoEcho.isPlaying)
-                //{
-                //    audioSourceNoEcho.Stop();
-                //}
+        //transform.localPosition = new Vector3(clampedX, transform.localPosition.y, 5f);
+        //float h = Input.GetAxis("Horizontal");// Input.GetAxis("Mouse X");
+        //float v = Input.GetAxis("Vertical");// Input.GetAxis("Mouse Y");
 
-                animator.Play("Flying", -1, 0f);
-                int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
-                audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
-            }
+        //if (won == false && gameManager.isPaused == false)
+        //{
+        //    LocalMove(h, v, xySpeed);
+        //    HorizontalLean(playerModel, h, 45, 0.1f);
 
-        }
+        //    //if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) // Old code that doesn't work in WebGl on New Unity Version
+        //    //{
+        //    //    //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
+        //    //    rb.velocity += Vector3.up * 7f; //15
+
+
+        //    //    //if (audioSourceNoEcho.isPlaying)
+        //    //    //{
+        //    //    //    audioSourceNoEcho.Stop();
+        //    //    //}
+
+        //    //    animator.Play("Flying", -1, 0f);
+        //    //    int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
+        //    //    audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
+        //    //}
+        //    var _pressed = false;
+
+        //    if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) // Old code that doesn't work in WebGl on New Unity Version
+        //    {
+        //        if (canPress)
+        //        {
+        //            _pressed = true;
+        //        }
+
+
+        //        //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
+
+        //        if (_pressed)
+        //        {
+        //            rb.linearVelocity += Vector3.up * 7f; //15
+        //            canPress = false;
+
+        //            //if (audioSourceNoEcho.isPlaying)
+        //            //{
+        //            //    audioSourceNoEcho.Stop();
+        //            //}
+        //            flyPressed = true;
+        //            flyTimeCounter = 0f;
+        //            animator.Play("Flying", -1, 0f);
+        //            int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
+        //            audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
+
+        //        }
+
+        //    }
+
+
+
+        //    if (Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space))
+        //    {
+        //        flyPressed = false;
+        //        canPress = true;
+        //    }
+
+
+        //}
 
         if (Input.GetKeyDown("escape"))
         {
             Application.Quit();
         }
     }
+
 
     private void LocalMove(float x, float y, float speed)
     {
@@ -210,4 +276,54 @@ public class BatMovement : MonoBehaviour
 
     }
 
+    public void MoveLeft(InputAction.CallbackContext context)
+    {
+        //if (context.performed)
+        //{
+        //    // Move left by a fixed amount
+        //    float newX = Mathf.Clamp(transform.localPosition.x - 0.5f, startx - 0.5f, startx + 0.5f);
+        //    transform.localPosition = new Vector3(newX, transform.localPosition.y, 5f);
+        //}
+    }
+
+    public void MoveRight(InputAction.CallbackContext context)
+    {
+        //if (context.performed)
+        //{
+        //    // Move right by a fixed amount
+        //    float newX = Mathf.Clamp(transform.localPosition.x + 0.5f, startx - 0.5f, startx + 0.5f);
+        //    transform.localPosition = new Vector3(newX, transform.localPosition.y, 5f);
+        //}
+    }
+
+    public void FlyPress(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        rb.linearVelocity += Vector3.up * 7f;
+
+        animator.Play("Flying", -1, 0f);
+        int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
+        audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
+    }
+
+    public void Move(InputAction.CallbackContext context)
+    {
+        //// Get horizontal input from the stick
+        //float moveValue = context.ReadValue<float>();
+
+        //// Clamp to -1 to 1 (just in case)
+        //moveValue = Mathf.Clamp(moveValue, -1f, 1f);
+
+        //// Move the bat horizontally
+        //transform.localPosition += new Vector3(moveValue, 0, 0) * xySpeed * Time.deltaTime;
+
+        //// Optionally clamp position within allowed range
+        //float clampedX = Mathf.Clamp(transform.localPosition.x, startx - 0.5f, startx + 0.5f);
+        //transform.localPosition = new Vector3(clampedX, transform.localPosition.y, 5f);
+    }
+
+    private void OnEnable()  { moveAction.Enable(); }
+    private void OnDisable() { moveAction.Disable(); }
 }
+
