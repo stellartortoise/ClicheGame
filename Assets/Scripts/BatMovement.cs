@@ -73,6 +73,16 @@ public class BatMovement : MonoBehaviour
 
     private int iteration = 0;
 
+    private bool isFlying = false;
+    private float flyTimeCounter = 0f;
+    [SerializeField]
+    private float maxFlyTime = 0.8f; // Adjust for desired "hold" duration
+    [SerializeField]
+    private float flyForce = 1.5f;     // Upward force while holding // Was 7f
+    private float maxFlyForce = 3f;
+    private float currentVelocity;
+    private bool flyPressed;
+
 
     // Start is called before the first frame update
     void Start()
@@ -110,21 +120,46 @@ public class BatMovement : MonoBehaviour
             LocalMove(h, v, xySpeed);
             HorizontalLean(playerModel, h, 45, 0.1f);
 
-            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
+            //if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) // Old code that doesn't work in WebGl on New Unity Version
+            //{
+            //    //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
+            //    rb.velocity += Vector3.up * 7f; //15
+
+
+            //    //if (audioSourceNoEcho.isPlaying)
+            //    //{
+            //    //    audioSourceNoEcho.Stop();
+            //    //}
+
+            //    animator.Play("Flying", -1, 0f);
+            //    int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
+            //    audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
+            //}
+
+            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space)) // Old code that doesn't work in WebGl on New Unity Version
             {
                 //rb.AddForce(new Vector3(0, 5f, 0), ForceMode.Force);
                 rb.velocity += Vector3.up * 7f; //15
-                
+
 
                 //if (audioSourceNoEcho.isPlaying)
                 //{
                 //    audioSourceNoEcho.Stop();
                 //}
-
+                flyPressed = true;
+                flyTimeCounter = 0f;
                 animator.Play("Flying", -1, 0f);
                 int getClipNumber = UnityEngine.Random.Range(0, clips.Length);
                 audioSourceNoEcho.PlayOneShot(clips[getClipNumber]);
             }
+
+
+
+            if (Input.GetButtonUp("Fire1") || Input.GetKeyUp(KeyCode.Space))
+            {
+                flyPressed = false;
+            }
+
 
         }
 
@@ -133,6 +168,7 @@ public class BatMovement : MonoBehaviour
             Application.Quit();
         }
     }
+
 
     private void LocalMove(float x, float y, float speed)
     {
